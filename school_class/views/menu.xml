@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <menuitem name="School Class"
+                  id="school_class_menu_root"
+                  web_icon="school_class,static/description/icon.png"
+                  groups="group_school_class_admin,group_school_class_user"
+        />
+
+        <menuitem
+                id="school_class_configurations"
+                name="Configuration"
+                parent="school_class_menu_root"
+                sequence="100"
+                groups="group_school_class_admin"
+
+        />
+
+
+        <menuitem
+                id="student_configurations"
+                name="Students"
+                parent="school_class_configurations"
+                action="school_student_action"
+        />
+        <menuitem
+                id="teacher_configurations"
+                name="Teacher"
+                parent="school_class_configurations"
+                action="school_teacher_action"
+        />
+        <menuitem
+                id="subject_configurations"
+                name="Subject"
+                parent="school_class_configurations"
+                action="school_subject_action"
+        />
+
+
+        <menuitem name="School Class"
+                  id="school_class_menu"
+                  parent="school_class_menu_root"
+                  action="school_class_action"
+                  groups="group_school_class_admin,group_school_class_user"
+
+        />
+
+    </data>
+</odoo>

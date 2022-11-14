@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <!-- ============== [tree view ] ============= -->
+        <record id="school_class_tree_view" model="ir.ui.view">
+            <field name="name">school.class.tree.view</field>
+            <field name="model">school.class</field>
+            <field name="arch" type="xml">
+                <tree string="School Class" sample="1" edit="1">
+                    <field name='name'/>
+                    <field name='subject_id'/>
+                    <field name="student_id"/>
+                    <field name='teacher_id'/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ============== [form view ] ============= -->
+        <record id="school_class_form_view" model="ir.ui.view">
+            <field name="name">school.class.form.view</field>
+            <field name="model">school.class</field>
+            <field name="arch" type="xml">
+                <form string="School Class">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="1"/>
+                                <field name='subject_id' required="1"  options="{'no_create_edit': True, 'no_create':True, 'no_open':True}"/>
+                            </group>
+                            <group>
+                                <field name="country_id_teacher" invisible="1"/>
+                                <field name='teacher_id'   required="1"  options="{'no_create_edit': True, 'no_create':True, 'no_open':True}"/>
+                                <field name="student_id" required="1" options="{'no_create_edit': True, 'no_create':True, 'no_open':True}" domain="[('is_student','=',True),('country_id','=',country_id_teacher)]" context="{'default_country_id':country_id_teacher}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="school_class_search_view" model="ir.ui.view">
+            <field name="name">school class search</field>
+            <field name="model">school.class</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name='name'/>
+                    <field name='teacher_id'/>
+                    <field name='student_id'/>
+                    <field name='subject_id'/>
+
+                    <filter string="Archived" name="active" domain="[('active', '=', False)]"/>
+
+                    <group expand="0" string="Group By">
+                        <filter string="Student" name="student_id" domain="[]" context="{'group_by':'student_id'}"/>
+                        <filter string="Subject" name="subject_id" domain="[]" context="{'group_by':'subject_id'}"/>
+                        <filter string="Teacher" name="teacher_id" domain="[]" context="{'group_by':'teacher_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>
